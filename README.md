@@ -29,4 +29,4 @@ Kerbal Powers is a geopolitical role-playing game using the universe of Kerbal S
 
 [Youtube](https://www.youtube.com/@KerbalPowers)
 
-[Discord](https://discord.gg/ujB29GKx3C)
+[Discord](https://discord.com/invite/UPg6K4W)
