@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using KSP.IO;
 using KSP.UI.Screens;
-using KSPAchievements;
-using BDArmory.Utils;
+using Caviation;
 
 namespace Cavitation
 {
@@ -190,16 +189,16 @@ namespace Cavitation
                 // Adjust buoyancy towards the target
                 if (absoluteError <= 1) // Within 1% of target, no adjustment
                 {
-                    ballastStatus = "Idle";
+                    ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastIdle");
                 }
                 else if (error > 1) // Need to take in more water
                 {
-                    ballastStatus = "Flooding";
+                    ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastFlooding");
                     partBuoyancy -= increment;
                 }
                 else if (error < -1) // Need to expel water
                 {
-                    ballastStatus = "Draining";
+                    ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastDraining");
                     partBuoyancy += increment;
                 }
 
@@ -213,7 +212,7 @@ namespace Cavitation
             }
             else
             {
-                ballastStatus = "Idle";
+                ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastIdle");
             }
         }
 
@@ -238,19 +237,19 @@ namespace Cavitation
                 {
                     if (!hasEC)
                     {
-                        ballastStatus = "Insufficient EC";
+                        ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastEC");
                     }
                     else if (error < -1)
                     {
-                        ballastStatus = "Ascending";
+                        ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastAscending");
                     }
                     else if (error > 1)
                     {
-                        ballastStatus = "Descending";
+                        ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastDescending");
                     }
                     else
                     {
-                        ballastStatus = "Idle";
+                        ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastIdle");
                     }
 
                     if (hasEC)
@@ -289,13 +288,13 @@ namespace Cavitation
                 }
                 else
                 {
-                    ballastStatus = "Idle";
+                    ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastIdle");
                 }
             }
             else
             {
                 currentDepth = 0;
-                ballastStatus = "Above Waterline";
+                ballastStatus = StringUtils.Localize("#LOC_KPDynamics_BallastWaterline");
             }
             //Debug.Log("[Cavitation] Real Bouyancy: " + part.buoyancy);
         }
