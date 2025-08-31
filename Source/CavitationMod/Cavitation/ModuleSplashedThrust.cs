@@ -32,22 +32,26 @@ namespace Cavitation
 
         public override void FXUpdate()
         {
-            if (base.CheckTransformsUnderwater())
+            // On physics update
+            // Check for water conditions in flight
+            if (HighLogic.LoadedSceneIsFlight)
             {
-                base.status = StringUtils.Localize("#LOC_KPDynamics_ThrustNominal");
-                base.finalThrust = (base.currentThrottle * trueMaxThrust) * (float)vessel.mainBody.oceanDensity;
-                base.maxThrust = base.finalThrust;
-                base.multIsp = 1f;
+                if (base.CheckTransformsUnderwater())
+                {
+                    base.status = StringUtils.Localize("#LOC_KPDynamics_ThrustNominal");
+                    base.finalThrust = (base.currentThrottle * trueMaxThrust) * (float)vessel.mainBody.oceanDensity;
+                    base.maxThrust = base.finalThrust;
+                    base.multIsp = 1f;
+                }
+                else
+                {
+                    base.status = StringUtils.Localize("#LOC_KPDynamics_ThrustWaterline");
+                    base.finalThrust = 0;//(base.currentThrottle * trueMaxThrust) * (float)(vessel.mainBody.atmDensityASL / 830f);
+                    base.maxThrust = base.finalThrust;
+                    base.multIsp = 0; //0.01f;
+                    //TODO: Toggle bubble fx directly so can have limited thrust
+                }
             }
-            else
-            {
-                base.status = StringUtils.Localize("#LOC_KPDynamics_ThrustWaterline");
-                base.finalThrust = 0;//(base.currentThrottle * trueMaxThrust) * (float)(vessel.mainBody.atmDensityASL / 830f);
-                base.maxThrust = base.finalThrust;
-                base.multIsp = 0; //0.01f;
-                //TODO: Toggle bubble fx directly so can have limited thrust
-            }
-
             base.FXUpdate();
         }
 
